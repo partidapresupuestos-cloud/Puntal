@@ -1,5 +1,5 @@
-// Puntal service worker · versión 2026.11.03-2
-const CACHE = "puntal-2026.11.03-2";
+// Puntal service worker · versión 2026.11.03-3
+const CACHE = "puntal-2026.11.03-3";
 const SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icons/icon-192.png", "./icons/icon-512.png", "./icons/apple-touch-icon.png", "./icons/favicon-32.png"];
 self.addEventListener("install", (e) => { e.waitUntil(caches.open(CACHE).then((c) => c.addAll(SHELL))); self.skipWaiting(); });
 self.addEventListener("activate", (e) => {
@@ -14,7 +14,7 @@ self.addEventListener("fetch", (e) => {
     e.respondWith(fetch(req).then((res) => put("./index.html", res)).catch(() => caches.match("./index.html")));
     return;
   }
-  if (url.origin === location.origin || /fonts\.(googleapis|gstatic)\.com$/.test(url.hostname)) {
+  if (url.origin === location.origin || /fonts\.(googleapis|gstatic)\.com$|cdnjs\.cloudflare\.com$/.test(url.hostname)) {
     e.respondWith(caches.match(req).then((hit) => hit || fetch(req).then((res) => put(req, res))));
   }
 });
