@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Calculadoras para instaladores: sección de cable, climatización y tubería · Puntal</title>
+<meta name="description" content="Calculadoras gratis: sección de cable por caída de tensión, potencia de climatización por m² y diámetro de tubería según el CTE.">
+<meta name="theme-color" content="#12161C">
+<link rel="icon" href="../app/icons/favicon-32.png">
+<link rel="canonical" href="https://partidapresupuestos-cloud.github.io/Puntal/calculadoras/">
+<meta property="og:title" content="Calculadoras para instaladores: sección de cable, climatización y tubería · Puntal">
+<meta property="og:description" content="Calculadoras gratis: sección de cable por caída de tensión, potencia de climatización por m² y diámetro de tubería según el CTE.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Roboto+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="../assets/web.css">
+</head>
+<body>
+<header class="top"><div class="in">
+  <a class="logo" href="../" style="color:inherit;text-decoration:none"><span class="mark">P</span>Puntal</a>
+  <nav aria-label="Secciones"><a href="../calculadoras/">Calculadoras</a><a href="../guias/">Guías</a><a href="../novedades/">Novedades</a></nav>
+  <a class="btn primary" href="../app/" style="padding:9px 14px;font-size:15px">Abrir Puntal</a>
+</div></header>
+<section class="hero page-hero"><div class="in"><p class="eyebrow">Calculadoras gratis</p><h1>Calculadoras para <em>la visita</em></h1><p class="lead">Sección de cable, potencia de un split y diámetro de tubería. Rápidas, orientativas y desde el móvil.</p></div></section>
+<div class="stripe" aria-hidden="true"></div><section class="s"><div class="in calc">
+<section class="card"><h3>Sección de cable por caída de tensión</h3><div class="grid">
+ <label>Suministro<select id="c-sis"><option value="m">Monofásico 230 V</option><option value="t">Trifásico 400 V</option></select></label>
+ <label>Potencia (W)<input id="c-p" inputmode="decimal" placeholder="Ej.: 7360"></label>
+ <label>Longitud de la línea (m)<input id="c-l" inputmode="decimal" placeholder="Ej.: 25"></label>
+ <label>Factor de potencia (cos φ)<input id="c-cos" inputmode="decimal" value="1"></label>
+ <label>Caída de tensión máxima (%)<input id="c-du" inputmode="decimal" value="3"></label>
+ <label>Conductor<select id="c-mat"><option value="48">Cobre, PVC (70 °C)</option><option value="44">Cobre, XLPE o EPR (90 °C)</option><option value="30">Aluminio, PVC (70 °C)</option><option value="28">Aluminio, XLPE (90 °C)</option></select></label></div>
+ <div id="r-cable" class="res" aria-live="polite"></div>
+ <p class="mini">Límites habituales: 3 % en circuitos interiores de vivienda; en otras instalaciones interiores, 3 % alumbrado y 5 % resto de usos. Comprueba además la intensidad admisible según el método de instalación (ITC-BT-19), la protección y las secciones mínimas de la ITC-BT-25.</p></section>
+<section class="card"><h3>Potencia de climatización</h3><div class="grid">
+ <label>Superficie (m²)<input id="k-m2" inputmode="decimal" placeholder="Ej.: 25"></label>
+ <label>Tipo de estancia<select id="k-r"><option value="85">Bien aislada, poco sol (85 W/m²)</option><option value="100" selected>Normal (100 W/m²)</option><option value="125">Mucho sol, última planta o cocina (125 W/m²)</option><option value="150">Local con mucha gente o equipos (150 W/m²)</option></select></label></div>
+ <div id="r-clima" class="res" aria-live="polite"></div>
+ <p class="mini">Estimación por ratio de superficie con altura de techo normal. Para estancias grandes, techos altos o locales, haz un cálculo de cargas térmicas.</p></section>
+<section class="card"><h3>Diámetro de tubería de agua</h3><div class="grid" id="t-grid"></div>
+ <div id="r-tubo" class="res" aria-live="polite"></div>
+ <p class="mini">Caudales instantáneos mínimos de agua fría del CTE DB HS 4 y simultaneidad K = 1/√(n−1). Comprueba la presión disponible, las pérdidas de carga y los diámetros mínimos de derivación del CTE.</p></section>
+<div class="note"><strong>También dentro de la app</strong><p>Las mismas calculadoras están en Puntal, en la pestaña Calculadoras, y funcionan sin conexión.</p></div>
+</div></section><section class="s"><div class="in"><div class="note"><strong>Pruébalo gratis, sin registrarte</strong><p>Puntal se abre en el navegador y se instala en el móvil o en el ordenador. Los paquetes de precios y plantillas completos te los enviamos gratis durante el lanzamiento.</p><div class="cta-row" style="margin-top:8px"><a class="btn primary" href="../app/">Abrir Puntal</a><a class="btn ghost" href="../#contacto">Pedir las plantillas</a></div></div></div></section>
+<footer><div class="in"><span>Puntal · Presupuestos y mediciones para instaladores</span><nav class="links" aria-label="Más páginas"><a href="../">Inicio</a><a href="../electricistas/">Electricistas</a><a href="../fontaneros/">Fontaneros</a><a href="../climatizacion/">Climatización</a><a href="../calculadoras/">Calculadoras</a><a href="../guias/">Guías</a><a href="../novedades/">Novedades</a><a href="../ca/" lang="ca">Català</a></nav><span>partida.presupuestos@gmail.com</span></div></footer>
+<script>(function(){
+const $=(i)=>document.getElementById(i), n=(v)=>{const x=parseFloat(String(v||"").replace(/\./g,"").replace(",","."));return isNaN(x)?NaN:x;};
+const f=(v,d=2)=>v.toLocaleString("es-ES",{minimumFractionDigits:d,maximumFractionDigits:d});
+const SECC=[1.5,2.5,4,6,10,16,25,35,50,70,95,120,150,185,240], SPL=[2.5,3.5,5,6,7.1,10,12.5,14];
+const AP=[["lav","Lavabo",.10],["duc","Ducha",.20],["ban","Bañera de 1,40 m o más",.30],["bid","Bidé",.10],["ino","Inodoro con cisterna",.10],["fre","Fregadero doméstico",.20],["lvv","Lavavajillas doméstico",.15],["lvd","Lavadora doméstica",.20]];
+const MU=[["16 × 2",12],["20 × 2",16],["26 × 3",20],["32 × 3",26],["40 × 3,5",33],["50 × 4",42],["63 × 4,5",54]], CO=[["12 × 1",10],["15 × 1",13],["18 × 1",16],["22 × 1",20],["28 × 1",26],["35 × 1",33],["42 × 1,2",39.6]];
+$("t-grid").innerHTML=AP.map(([k,l])=>`<label>${l}<input id="t-${k}" inputmode="numeric" value="0"></label>`).join("")+`<label>Velocidad máxima (m/s)<input id="t-v" inputmode="decimal" value="1,5"></label>`;
+function run(){
+ const tri=$("c-sis").value==="t",V=tri?400:230,P=n($("c-p").value),L=n($("c-l").value),cos=n($("c-cos").value),du=n($("c-du").value),g=+$("c-mat").value;
+ if(!(P>0&&L>0&&cos>0&&du>0)) $("r-cable").innerHTML='<span>Escribe la potencia y la longitud.</span>';
+ else{const I=tri?P/(Math.sqrt(3)*V*cos):P/(V*cos),e=du*V/100,Sm=tri?L*P/(g*e*V):2*L*P/(g*e*V),Sc=SECC.find(x=>x>=Sm),cd=Sc?(tri?L*P/(g*Sc*V):2*L*P/(g*Sc*V))/V*100:null;
+  $("r-cable").innerHTML=`<span>Intensidad de cálculo</span><b>${f(I)} A</b><span>Sección mínima por caída de tensión: ${f(Sm)} mm²</span><span>Sección comercial: <b>${Sc?String(Sc).replace(".",",")+" mm²":"más de 240 mm²"}</b>${cd!=null?" · caída real "+f(cd)+" %":""}</span>`;}
+ const m2=n($("k-m2").value),r=+$("k-r").value;
+ if(!(m2>0)) $("r-clima").innerHTML='<span>Escribe la superficie.</span>';
+ else{const kw=m2*r/1000,sp=SPL.find(x=>x>=kw);$("r-clima").innerHTML=`<span>Potencia frigorífica estimada</span><b>${f(kw)} kW</b><span>≈ ${Math.round(kw*860).toLocaleString("es-ES")} frigorías/hora</span><span>Equipo comercial orientativo: <b>${sp?String(sp).replace(".",",")+" kW":"más de 14 kW: varios equipos o conductos"}</b></span>`;}
+ let Q=0,c=0;AP.forEach(([k,,q])=>{const v=Math.max(0,Math.floor(n($("t-"+k).value)||0));Q+=v*q;c+=v;});const v=n($("t-v").value);
+ if(!c||!(v>0)) $("r-tubo").innerHTML='<span>Indica cuántos aparatos alimenta el tramo.</span>';
+ else{const K=c>1?1/Math.sqrt(c-1):1,Qs=Q*K,D=Math.sqrt(4*(Qs/1000)/(Math.PI*v))*1000,mu=MU.find(x=>x[1]>=D),co=CO.find(x=>x[1]>=D);
+  $("r-tubo").innerHTML=`<span>Caudal instalado ${f(Q)} l/s · simultaneidad ${f(K)}</span><b>${f(Qs)} l/s</b><span>Diámetro interior mínimo: ${f(D)} mm</span><span>Multicapa: <b>${mu?mu[0]+" mm":"más de 63 mm"}</b> · Cobre: <b>${co?co[0]+" mm":"más de 42 mm"}</b></span>`;}
+}
+document.addEventListener("input",run);document.addEventListener("change",run);run();
+})();</script>
+</body>
+</html>
