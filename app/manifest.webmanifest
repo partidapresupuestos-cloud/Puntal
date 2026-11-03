@@ -7,7 +7,7 @@
  "display": "standalone",
  "background_color": "#161B22",
  "theme_color": "#161B22",
- "description": "Presupuestos y mediciones para instaladores: capítulos, mediciones, packs de faenas y PDF para el cliente.",
+ "description": "Presupuestos y mediciones para instaladores: capítulos, mediciones, plantillas de trabajo y PDF para el cliente.",
  "icons": [
   {
    "src": "icons/icon-192.png",
