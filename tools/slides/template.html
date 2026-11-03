@@ -1,0 +1,50 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><style>
+@font-face{font-family:"Arch";src:url(../fonts/arch.woff2) format("woff2");font-weight:100 900;font-stretch:62% 125%;}
+@font-face{font-family:"Mono";src:url(../fonts/mono.woff2) format("woff2");font-weight:500;}
+*{box-sizing:border-box;margin:0}
+body{width:1080px;height:1350px;background:#12161C;color:#EEF0F3;font-family:"Arch",sans-serif;overflow:hidden}
+.s{position:relative;width:1080px;height:1350px;padding:96px 88px 150px;display:flex;flex-direction:column;gap:36px;
+ background-image:linear-gradient(#222a35 1.5px,transparent 1.5px),linear-gradient(90deg,#222a35 1.5px,transparent 1.5px);background-size:60px 60px}
+.eb{font-family:"Mono";font-size:30px;letter-spacing:.14em;text-transform:uppercase;color:#F2C200}
+h1{font-weight:800;font-stretch:72%;text-transform:uppercase;font-size:118px;line-height:.95;letter-spacing:-.005em}
+h1 em{font-style:normal;color:#F2C200}
+h2{font-weight:800;font-stretch:72%;text-transform:uppercase;font-size:92px;line-height:.98}
+p{font-size:40px;line-height:1.35;color:#C3CAD4}
+p b,li b{color:#EEF0F3}
+.big{font-family:"Mono";font-size:150px;color:#F2C200;line-height:1}
+.foot{position:absolute;left:88px;right:88px;bottom:64px;display:flex;align-items:center;gap:18px;font-size:30px;color:#A3ACB9}
+.mk{width:44px;height:44px;border:7px solid #F2C200;position:relative;display:grid;place-items:center;font-weight:800;font-size:22px;color:#EEF0F3}
+.mk:after{content:"";position:absolute;right:-12px;bottom:-12px;width:15px;height:15px;background:#F2C200}
+.foot .nm{font-weight:800;font-stretch:75%;font-size:36px;letter-spacing:.04em;color:#EEF0F3;text-transform:uppercase}
+.foot .pg{margin-left:auto;font-family:"Mono";font-size:26px}
+.stripe{position:absolute;left:0;right:0;top:0;height:16px;background:repeating-linear-gradient(-45deg,#F2C200 0 22px,#12161C 22px 44px)}
+.tbl{width:100%;border-collapse:collapse;font-size:34px}
+.tbl td{padding:18px 0;border-bottom:2px solid #2C3440;vertical-align:top}
+.tbl td.n{font-family:"Mono";text-align:right;white-space:nowrap;padding-left:24px;color:#EEF0F3}
+.tbl td.c{font-family:"Mono";color:#F2C200;font-size:28px;padding-right:20px;white-space:nowrap}
+.tbl tr.t td{border-bottom:0;border-top:4px solid #F2C200;font-weight:800;font-size:44px;padding-top:24px}
+.chips{display:flex;flex-wrap:wrap;gap:16px}
+.chips span{border:2px solid #2C3440;background:#12161C;border-radius:999px;padding:14px 26px;font-size:34px}
+.chips span b{color:#F2C200;font-family:"Mono";font-size:24px;margin-right:10px;font-weight:500}
+ul{list-style:none;padding:0;display:grid;gap:22px}
+li{font-size:42px;line-height:1.3;color:#C3CAD4;padding-left:46px;position:relative}
+li:before{content:"";position:absolute;left:0;top:18px;width:22px;height:22px;background:#F2C200}
+.phone{align-self:center;width:460px;border:12px solid #2C3440;border-radius:56px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.phone img{display:block;width:100%}
+.shot{border:2px solid #2C3440;border-radius:14px;overflow:hidden;height:560px}
+.shot img{width:100%;display:block}
+.calc{font-family:"Mono";font-size:40px;background:#1A2029;border:2px solid #2C3440;border-radius:12px;padding:30px 34px;display:grid;gap:14px;color:#EEF0F3}
+.calc div{display:flex;justify-content:space-between;gap:20px}
+.calc .k{color:#A3ACB9;font-family:"Arch";font-size:38px}
+.calc .tot{border-top:3px solid #F2C200;padding-top:18px;color:#F2C200}
+.cta{background:#F2C200;color:#12161C;border-radius:14px;padding:34px 38px;display:grid;gap:10px}
+.cta strong{font-weight:800;font-stretch:75%;font-size:58px;text-transform:uppercase;line-height:1}
+.cta span{font-size:36px}
+.mail{font-family:"Mono";font-size:38px;color:#EEF0F3;background:#1A2029;border:2px solid #2C3440;border-radius:10px;padding:22px 28px}
+.note{font-size:30px;color:#A3ACB9}
+.s.c{justify-content:center;gap:44px}
+.s.c p{font-size:48px}
+.s.c h2{font-size:104px}
+.s.c .big{font-size:190px}
+
+#c{display:contents}</style></head><body><div class="s" id="s"><div class="stripe"></div><div id="c"></div><div class="foot"><span class="mk">P</span><span class="nm">Puntal</span><span>@puntalapp</span><span class="pg" id="pg"></span></div></div></body></html>

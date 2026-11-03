@@ -1,0 +1,75 @@
+{
+ "semana": "2026-45",
+ "carruseles": {
+  "1-lanzamiento": [
+   {
+    "center": false,
+    "html": "<div class=\"eb\">Nuevo · Gratis</div><h1>Presupuestos de obra <em>desde el móvil</em></h1><p>Para electricistas, fontaneros y frigoristas.</p><div class=\"phone\"><img src=\"img/phone-editor.png\"></div>"
+   },
+   {
+    "center": false,
+    "html": "<div class=\"eb\">Mediciones</div><h2>Mide como en la obra</h2><p>Una línea por zona o tramo. La cantidad se suma sola.</p>\n<div class=\"calc\"><div><span class=\"k\">Salón</span><span>14,50 m</span></div><div><span class=\"k\">Dormitorio 1</span><span>9,20 m</span></div><div><span class=\"k\">Cocina, dos tramos</span><span>2 × 4,75 = 9,50 m</span></div>\n<div class=\"tot\"><span>33,20 m × 9,50 €</span><span>315,40 €</span></div></div><p class=\"note\">Tubo corrugado Ø20 empotrado. Precio de ejemplo.</p>"
+   },
+   {
+    "center": false,
+    "html": "<div class=\"eb\">Packs de faenas</div><h2>Un baño completo en un clic</h2><p>Eliges la faena y entran todas sus partidas. Luego ajustas cantidades.</p>\n<div class=\"chips\"><span><b>EL</b>Reforma de baño</span><span><b>EL</b>Reforma de cocina</span><span><b>EL</b>Cambio de cuadro y boletín</span><span><b>EL</b>Punto de recarga VE</span><span><b>FO</b>Bañera por plato de ducha</span><span><b>FO</b>Sustitución de termo</span><span><b>CL</b>Split hasta 3,5 kW</span><span><b>CL</b>Sustitución de split</span></div>"
+   },
+   {
+    "center": false,
+    "html": "<div class=\"eb\">Documento</div><h2>Un PDF que da confianza</h2>\n<ul><li><b>Tu logo</b> y tus datos</li><li>Capítulos, mediciones e <b>IVA desglosado</b></li><li>Tus condiciones de pago</li><li>Espacio para la <b>firma de aceptación</b></li></ul><div class=\"shot\"><img src=\"img/shot-doc.jpg\"></div>"
+   },
+   {
+    "center": false,
+    "html": "<div class=\"eb\">Gratis · Sin registros</div><h2>Pruébala hoy</h2>\n<div class=\"cta\"><strong>Enlace en la bio</strong><span>Se instala en el móvil y en el ordenador, y funciona sin conexión.</span></div>\n<p>¿Quieres los <b>paquetes de precios y packs completos</b> de tu oficio? Escríbenos y te los mandamos gratis:</p>\n<div class=\"mail\">partida.presupuestos@gmail.com</div>"
+   }
+  ],
+  "2-olvidos": [
+   {
+    "center": false,
+    "html": "<div class=\"eb\">Reforma eléctrica</div><h1>5 cosas que se <em>olvidan</em> al presupuestar</h1><p>Y que acabas pagando tú.</p><div class=\"big\">05</div><p>Guárdalo para tu próximo presupuesto.</p>"
+   },
+   {
+    "center": true,
+    "html": "<div class=\"big\">01</div><h2>El boletín y la tramitación</h2><p>El certificado de instalación (CIE) y el papeleo llevan su tiempo. Si no está en el presupuesto, <b>lo regalas</b>.</p>"
+   },
+   {
+    "center": true,
+    "html": "<div class=\"big\">02</div><h2>Las ayudas de albañilería</h2><p>Rozas, tapado y remates. Antes de dar precio, deja claro <b>quién tapa las rozas</b> y ponlo por metro.</p>"
+   },
+   {
+    "center": true,
+    "html": "<div class=\"big\">03</div><h2>El desmontaje de lo viejo</h2><p>Quitar la instalación antigua, mecanismos y cuadro lleva horas. <b>Va en su propia partida.</b></p>"
+   },
+   {
+    "center": true,
+    "html": "<div class=\"big\">04</div><h2>El material menudo y los desplazamientos</h2><p>Cajas de registro, bornas, tacos, viajes al almacén… Sumados, <b>se comen el margen</b>.</p>"
+   },
+   {
+    "center": true,
+    "html": "<div class=\"big\">05</div><h2>Las protecciones del cuadro</h2><p>Revisa qué protecciones pide el reglamento (REBT) para el cuadro nuevo y <b>preséntalas aparte</b>, para que el cliente vea qué paga.</p>"
+   },
+   {
+    "center": false,
+    "html": "<div class=\"eb\">Con Puntal</div><h2>Que no se te escape ninguna</h2><p>Los packs completos de Puntal ya llevan <b>boletín, desmontaje, cajas de registro y protecciones</b>. Solo ajustas cantidades y precios.</p>\n<div class=\"cta\"><strong>Enlace en la bio</strong><span>Se instala en el móvil y en el ordenador, y funciona sin conexión.</span></div>\n<p>¿Quieres los <b>paquetes de precios y packs completos</b> de tu oficio? Escríbenos y te los mandamos gratis:</p>\n<div class=\"mail\">partida.presupuestos@gmail.com</div>"
+   }
+  ],
+  "3-pack-split": [
+   {
+    "center": false,
+    "html": "<div class=\"eb\">Climatización</div><h1>¿Cuánto cobras por instalar <em>un split</em>?</h1><p>Así lo presupuesta un pack de Puntal, partida a partida.</p><div class=\"big\">3,5 kW</div>"
+   },
+   {
+    "center": false,
+    "html": "<div class=\"eb\">Pack · Split hasta 3,5 kW</div>\n<table class=\"tbl\"><tr><td class=\"c\">CL-001</td><td>Instalación split 1×1, línea hasta 3 m (sin equipo)</td><td class=\"n\">350,00</td></tr>\n<tr><td class=\"c\">CL-009</td><td>Soporte mural unidad exterior</td><td class=\"n\">45,00</td></tr>\n<tr><td class=\"c\">CL-007</td><td>Desagüe de condensados · 3 m × 12,00</td><td class=\"n\">36,00</td></tr>\n<tr><td class=\"c\">CL-013</td><td>Prueba de estanqueidad y vacío</td><td class=\"n\">60,00</td></tr>\n<tr><td class=\"c\">CL-018</td><td>Puesta en marcha y certificado</td><td class=\"n\">90,00</td></tr>\n<tr class=\"t\"><td></td><td>Total</td><td class=\"n\">581,00 € + IVA</td></tr></table>\n<p class=\"note\">Precios orientativos para no empezar de cero: pon los tuyos.</p>"
+   },
+   {
+    "center": true,
+    "html": "<div class=\"eb\">En la obra</div><h2>¿Línea más larga? ¿Bomba de condensados?</h2><p>Cambias la cantidad y <b>el total se recalcula solo</b>.</p><p>O eliges el pack <b>\"Split con 5 m de línea extra y bomba\"</b> y entra todo de golpe.</p><p>Y si tienes tu forma de hacerlo, <b>guárdala como pack propio</b>.</p>"
+   },
+   {
+    "center": false,
+    "html": "<div class=\"eb\">Gratis · Sin registros</div><h2>Pruébala hoy</h2>\n<div class=\"cta\"><strong>Enlace en la bio</strong><span>Se instala en el móvil y en el ordenador, y funciona sin conexión.</span></div>\n<p>¿Quieres los <b>paquetes de precios y packs completos</b> de tu oficio? Escríbenos y te los mandamos gratis:</p>\n<div class=\"mail\">partida.presupuestos@gmail.com</div>"
+   }
+  ]
+ }
+}

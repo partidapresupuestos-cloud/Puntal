@@ -1,0 +1,75 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><style>
+@font-face{font-family:"Arch";src:url(../fonts/arch.woff2) format("woff2");font-weight:100 900;font-stretch:62% 125%}
+@font-face{font-family:"Mono";src:url(../fonts/mono.woff2) format("woff2");font-weight:500}
+*{box-sizing:border-box;margin:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#12161C;color:#EEF0F3;font-family:"Arch",sans-serif}
+.bg{position:absolute;inset:0;background-image:linear-gradient(#202833 2px,transparent 2px),linear-gradient(90deg,#202833 2px,transparent 2px);background-size:72px 72px}
+.stripe{position:absolute;left:0;right:0;top:0;height:18px;background:repeating-linear-gradient(-45deg,#F2C200 0 24px,#12161C 24px 48px);z-index:9}
+#cap{position:absolute;left:70px;right:70px;top:80px;height:360px;display:flex;align-items:center}
+#cap div{font-weight:800;font-stretch:72%;text-transform:uppercase;font-size:92px;line-height:.98;text-wrap:balance;transition:opacity .35s,transform .35s}
+#cap div.out{opacity:0;transform:translateY(24px)}
+em{font-style:normal;color:#F2C200}
+#phone{position:absolute;left:111px;top:470px;width:858px;height:1300px;border:12px solid #2C3440;border-radius:58px;overflow:hidden;background:#EEF0F2;box-shadow:0 40px 90px rgba(0,0,0,.55)}
+#phone iframe{width:390px;height:591px;border:0;transform:scale(2.2);transform-origin:0 0}
+.foot{position:absolute;left:70px;right:70px;bottom:56px;display:flex;align-items:center;gap:20px;font-size:34px;color:#A3ACB9;z-index:9}
+.mk{width:50px;height:50px;border:8px solid #F2C200;position:relative;display:grid;place-items:center;font-weight:800;font-size:24px;color:#EEF0F3}
+.mk:after{content:"";position:absolute;right:-14px;bottom:-14px;width:17px;height:17px;background:#F2C200}
+.nm{font-weight:800;font-stretch:75%;font-size:40px;color:#EEF0F3;text-transform:uppercase;letter-spacing:.04em}
+#tap{position:absolute;width:120px;height:120px;margin:-60px 0 0 -60px;border-radius:50%;border:10px solid #F2C200;background:rgba(242,194,0,.25);opacity:0;pointer-events:none;z-index:6}
+#tap.on{animation:tap .6s ease-out}
+@keyframes tap{0%{opacity:1;transform:scale(.5)}100%{opacity:0;transform:scale(1.3)}}
+.card{position:absolute;inset:0;z-index:8;display:flex;flex-direction:column;justify-content:center;gap:44px;padding:0 90px;background:#12161C;opacity:0;transition:opacity .4s;pointer-events:none}
+.card.on{opacity:1}
+#cardin{display:flex;flex-direction:column;gap:46px}
+.card .bg2{position:absolute;inset:0;z-index:-1;background-image:linear-gradient(#202833 2px,transparent 2px),linear-gradient(90deg,#202833 2px,transparent 2px);background-size:72px 72px}
+.card h1{font-weight:800;font-stretch:72%;text-transform:uppercase;font-size:130px;line-height:.95}
+.card h2{font-weight:800;font-stretch:72%;text-transform:uppercase;font-size:110px;line-height:.98}
+.card p{font-size:52px;line-height:1.3;color:#C3CAD4}
+.card p b{color:#EEF0F3}
+.num{font-family:"Mono";font-size:230px;color:#F2C200;line-height:1}
+.ctab{background:#F2C200;color:#12161C;border-radius:18px;padding:40px 46px;display:grid;gap:12px}
+.ctab strong{font-weight:800;font-stretch:75%;font-size:84px;text-transform:uppercase;line-height:1}
+.ctab span{font-size:44px}
+.mail{font-family:"Mono";font-size:44px;background:#1A2029;border:3px solid #2C3440;border-radius:12px;padding:26px 30px;color:#EEF0F3}
+.biglogo{display:flex;align-items:center;gap:34px}
+.biglogo .mk{width:120px;height:120px;border-width:18px;font-size:60px}
+.biglogo .mk:after{right:-32px;bottom:-32px;width:40px;height:40px}
+.biglogo b{font-weight:800;font-stretch:75%;font-size:120px;text-transform:uppercase;letter-spacing:.03em}
+.chat{background:#1A2029;border:3px solid #2C3440;border-radius:28px;padding:40px;display:grid;gap:22px}
+.chat .h{font-size:34px;color:#A3ACB9}
+.bub{background:#2A3340;border-radius:26px 26px 26px 6px;padding:26px 30px;font-size:46px;line-height:1.3;justify-self:start;max-width:92%}
+</style></head><body>
+<div class="bg"></div><div class="stripe"></div>
+<div id="cap"><div class="out"></div></div>
+<div id="phone"><iframe id="app" src="../../app/"></iframe></div>
+<div class="foot"><span class="mk">P</span><span class="nm">Puntal</span><span>@puntalapp</span></div>
+<div id="tap"></div>
+<div class="card" id="card"><div class="bg2"></div><div id="cardin"></div></div>
+<script>
+const V=new URLSearchParams(location.search).get('v')||'1';
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+const fr=()=>document.getElementById('app');
+const A=code=>fr().contentWindow.eval(code);
+const D=()=>fr().contentDocument;
+const capEl=document.querySelector('#cap div');
+async function cap(h){capEl.classList.add('out');await wait(300);capEl.innerHTML=h;capEl.classList.remove('out');}
+function card(h){document.getElementById('cardin').innerHTML=h;document.getElementById('card').classList.add('on');}
+function uncard(){document.getElementById('card').classList.remove('on');}
+async function see(sel,block){const e=D().querySelector(sel);if(e){e.scrollIntoView({block:block||'center',behavior:'smooth'});await wait(700);}return e;}
+async function tap(sel){const e=await see(sel);if(!e)return;const r=e.getBoundingClientRect(),f=fr().getBoundingClientRect();
+ const t=document.getElementById('tap');t.style.left=(f.left+(r.left+r.width/2)*2.2)+'px';t.style.top=(f.top+(r.top+r.height/2)*2.2)+'px';
+ t.classList.remove('on');void t.offsetWidth;t.classList.add('on');await wait(250);e.click();await wait(500);}
+async function type(sel,txt,ms){const e=await see(sel);if(!e)return;e.focus();e.value='';for(const ch of txt){e.value+=ch;e.dispatchEvent(new Event('input',{bubbles:true}));await wait(ms||90);}e.blur();await wait(250);}
+const END=`<div class="biglogo"><span class="mk">P</span><b>Puntal</b></div><h2>Presupuestos de obra. <em>Gratis.</em></h2>
+<div class="ctab"><strong>Enlace en la bio</strong><span>Se instala en el móvil y funciona sin conexión.</span></div>
+<p>Pide los <b>packs de precios de tu oficio</b>:</p><div class="mail">partida.presupuestos@gmail.com</div>`;
+async function setup(){await new Promise(r=>{const f=fr();if(f.contentDocument&&f.contentDocument.readyState==='complete'&&f.contentWindow.S)r();else f.onload=()=>r();});
+ A('try{localStorage.clear()}catch(e){}');A('S=seed();S.packs=defaultPacks();S.empresa.nombre="Instalaciones Ejemplo";S.empresa.nif="";save();render();');}
+window.DONE=false;
+// Carga la línea de tiempo de la semana: ?t=semana-2026-45&v=1
+const TL=new URLSearchParams(location.search).get('t')||'semana-2026-45';
+const sc=document.createElement('script');sc.src='timelines/'+TL+'.js';
+sc.onload=async()=>{try{await window.T[V]();}catch(e){console.error(e)}window.DONE=true;};
+sc.onerror=()=>{console.error('No existe la línea de tiempo '+TL);window.DONE=true;};
+document.body.appendChild(sc);
+</script></body></html>
