@@ -12,7 +12,7 @@
    },
    {
     "center": false,
-    "html": "<div class=\"eb\">Packs de faenas</div><h2>Un baño completo en un clic</h2><p>Eliges la faena y entran todas sus partidas. Luego ajustas cantidades.</p>\n<div class=\"chips\"><span><b>EL</b>Reforma de baño</span><span><b>EL</b>Reforma de cocina</span><span><b>EL</b>Cambio de cuadro y boletín</span><span><b>EL</b>Punto de recarga VE</span><span><b>FO</b>Bañera por plato de ducha</span><span><b>FO</b>Sustitución de termo</span><span><b>CL</b>Split hasta 3,5 kW</span><span><b>CL</b>Sustitución de split</span></div>"
+    "html": "<div class=\"eb\">Plantillas de trabajo</div><h2>Un baño completo en un clic</h2><p>Eliges el trabajo y entran todas sus partidas. Luego ajustas cantidades.</p>\n<div class=\"chips\"><span><b>EL</b>Reforma de baño</span><span><b>EL</b>Reforma de cocina</span><span><b>EL</b>Cambio de cuadro y boletín</span><span><b>EL</b>Punto de recarga VE</span><span><b>FO</b>Bañera por plato de ducha</span><span><b>FO</b>Sustitución de termo</span><span><b>CL</b>Split hasta 3,5 kW</span><span><b>CL</b>Sustitución de split</span></div>"
    },
    {
     "center": false,
@@ -20,7 +20,7 @@
    },
    {
     "center": false,
-    "html": "<div class=\"eb\">Gratis · Sin registros</div><h2>Pruébala hoy</h2>\n<div class=\"cta\"><strong>Enlace en la bio</strong><span>Se instala en el móvil y en el ordenador, y funciona sin conexión.</span></div>\n<p>¿Quieres los <b>paquetes de precios y packs completos</b> de tu oficio? Escríbenos y te los mandamos gratis:</p>\n<div class=\"mail\">partida.presupuestos@gmail.com</div>"
+    "html": "<div class=\"eb\">Gratis · Sin registros</div><h2>Pruébala hoy</h2>\n<div class=\"cta\"><strong>Enlace en la bio</strong><span>Se instala en el móvil y en el ordenador, y funciona sin conexión.</span></div>\n<p>¿Quieres los <b>paquetes de precios y plantillas completos</b> de tu oficio? Escríbenos y te los mandamos gratis:</p>\n<div class=\"mail\">partida.presupuestos@gmail.com</div>"
    }
   ],
   "2-olvidos": [
@@ -50,25 +50,25 @@
    },
    {
     "center": false,
-    "html": "<div class=\"eb\">Con Puntal</div><h2>Que no se te escape ninguna</h2><p>Los packs completos de Puntal ya llevan <b>boletín, desmontaje, cajas de registro y protecciones</b>. Solo ajustas cantidades y precios.</p>\n<div class=\"cta\"><strong>Enlace en la bio</strong><span>Se instala en el móvil y en el ordenador, y funciona sin conexión.</span></div>\n<p>¿Quieres los <b>paquetes de precios y packs completos</b> de tu oficio? Escríbenos y te los mandamos gratis:</p>\n<div class=\"mail\">partida.presupuestos@gmail.com</div>"
+    "html": "<div class=\"eb\">Con Puntal</div><h2>Que no se te escape ninguna</h2><p>Las plantillas completas de Puntal ya llevan <b>boletín, desmontaje, cajas de registro y protecciones</b>. Solo ajustas cantidades y precios.</p>\n<div class=\"cta\"><strong>Enlace en la bio</strong><span>Se instala en el móvil y en el ordenador, y funciona sin conexión.</span></div>\n<p>¿Quieres los <b>paquetes de precios y plantillas completos</b> de tu oficio? Escríbenos y te los mandamos gratis:</p>\n<div class=\"mail\">partida.presupuestos@gmail.com</div>"
    }
   ],
   "3-pack-split": [
    {
     "center": false,
-    "html": "<div class=\"eb\">Climatización</div><h1>¿Cuánto cobras por instalar <em>un split</em>?</h1><p>Así lo presupuesta un pack de Puntal, partida a partida.</p><div class=\"big\">3,5 kW</div>"
+    "html": "<div class=\"eb\">Climatización</div><h1>¿Cuánto cobras por instalar <em>un split</em>?</h1><p>Así lo presupuesta una plantilla de Puntal, partida a partida.</p><div class=\"big\">3,5 kW</div>"
    },
    {
     "center": false,
-    "html": "<div class=\"eb\">Pack · Split hasta 3,5 kW</div>\n<table class=\"tbl\"><tr><td class=\"c\">CL-001</td><td>Instalación split 1×1, línea hasta 3 m (sin equipo)</td><td class=\"n\">350,00</td></tr>\n<tr><td class=\"c\">CL-009</td><td>Soporte mural unidad exterior</td><td class=\"n\">45,00</td></tr>\n<tr><td class=\"c\">CL-007</td><td>Desagüe de condensados · 3 m × 12,00</td><td class=\"n\">36,00</td></tr>\n<tr><td class=\"c\">CL-013</td><td>Prueba de estanqueidad y vacío</td><td class=\"n\">60,00</td></tr>\n<tr><td class=\"c\">CL-018</td><td>Puesta en marcha y certificado</td><td class=\"n\">90,00</td></tr>\n<tr class=\"t\"><td></td><td>Total</td><td class=\"n\">581,00 € + IVA</td></tr></table>\n<p class=\"note\">Precios orientativos para no empezar de cero: pon los tuyos.</p>"
+    "html": "<div class=\"eb\">Plantilla · Split hasta 3,5 kW</div>\n<table class=\"tbl\"><tr><td class=\"c\">CL-001</td><td>Instalación split 1×1, línea hasta 3 m (sin equipo)</td><td class=\"n\">350,00</td></tr>\n<tr><td class=\"c\">CL-009</td><td>Soporte mural unidad exterior</td><td class=\"n\">45,00</td></tr>\n<tr><td class=\"c\">CL-007</td><td>Desagüe de condensados · 3 m × 12,00</td><td class=\"n\">36,00</td></tr>\n<tr><td class=\"c\">CL-013</td><td>Prueba de estanqueidad y vacío</td><td class=\"n\">60,00</td></tr>\n<tr><td class=\"c\">CL-018</td><td>Puesta en marcha y certificado</td><td class=\"n\">90,00</td></tr>\n<tr class=\"t\"><td></td><td>Total</td><td class=\"n\">581,00 € + IVA</td></tr></table>\n<p class=\"note\">Precios orientativos para no empezar de cero: pon los tuyos.</p>"
    },
    {
     "center": true,
-    "html": "<div class=\"eb\">En la obra</div><h2>¿Línea más larga? ¿Bomba de condensados?</h2><p>Cambias la cantidad y <b>el total se recalcula solo</b>.</p><p>O eliges el pack <b>\"Split con 5 m de línea extra y bomba\"</b> y entra todo de golpe.</p><p>Y si tienes tu forma de hacerlo, <b>guárdala como pack propio</b>.</p>"
+    "html": "<div class=\"eb\">En la obra</div><h2>¿Línea más larga? ¿Bomba de condensados?</h2><p>Cambias la cantidad y <b>el total se recalcula solo</b>.</p><p>O eliges la plantilla <b>\"Split con 5 m de línea extra y bomba\"</b> y entra todo de golpe.</p><p>Y si tienes tu forma de hacerlo, <b>guárdala como plantilla propia</b>.</p>"
    },
    {
     "center": false,
-    "html": "<div class=\"eb\">Gratis · Sin registros</div><h2>Pruébala hoy</h2>\n<div class=\"cta\"><strong>Enlace en la bio</strong><span>Se instala en el móvil y en el ordenador, y funciona sin conexión.</span></div>\n<p>¿Quieres los <b>paquetes de precios y packs completos</b> de tu oficio? Escríbenos y te los mandamos gratis:</p>\n<div class=\"mail\">partida.presupuestos@gmail.com</div>"
+    "html": "<div class=\"eb\">Gratis · Sin registros</div><h2>Pruébala hoy</h2>\n<div class=\"cta\"><strong>Enlace en la bio</strong><span>Se instala en el móvil y en el ordenador, y funciona sin conexión.</span></div>\n<p>¿Quieres los <b>paquetes de precios y plantillas completos</b> de tu oficio? Escríbenos y te los mandamos gratis:</p>\n<div class=\"mail\">partida.presupuestos@gmail.com</div>"
    }
   ]
  }

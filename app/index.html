@@ -430,13 +430,13 @@ function vLista() {
   return `<div class="page-h"><h1>Presupuestos</h1><button class="btn primary" data-act="nuevo">Nuevo presupuesto</button></div>
     <section class="panel beta">
       <div class="ph"><h2>Puntal es gratis</h2><span class="sample">Lanzamiento</span></div>
-      <p class="hint">La app es gratis. Los <strong>paquetes de precios y packs de faenas completos</strong> (electricidad, fontanería y climatización) también lo son durante el lanzamiento: pídelos escribiendo a <strong class="mono" style="user-select:all">partida.presupuestos@gmail.com</strong> y, si puedes, responde a estas preguntas para ayudarnos a mejorar.</p>
+      <p class="hint">La app es gratis. Los <strong>paquetes de precios y plantillas de trabajo completos</strong> (electricidad, fontanería y climatización) también lo son durante el lanzamiento: pídelos escribiendo a <strong class="mono" style="user-select:all">partida.presupuestos@gmail.com</strong> y, si puedes, responde a estas preguntas para ayudarnos a mejorar.</p>
       <ol class="hint qs">
         <li>¿Cuál es tu oficio y cuántos presupuestos haces al mes?</li>
         <li>¿Has hecho un presupuesto real con Puntal? ¿Cuánto has tardado?</li>
         <li>¿Qué te ha faltado o qué te ha costado entender?</li>
-        <li>¿Qué precios o cantidades de los packs no cuadran con los tuyos?</li>
-        <li>¿Pagarías por recibir cada año los paquetes de precios y packs actualizados? ¿Cuánto?</li>
+        <li>¿Qué precios o cantidades de las plantillas no cuadran con los tuyos?</li>
+        <li>¿Pagarías por recibir cada año los paquetes de precios y plantillas actualizados? ¿Cuánto?</li>
       </ol>
     </section>
     ${S.presupuestos.length ? `<div class="cards">${cards}</div>` : `<div class="empty"><p class="hint">Todavía no tienes presupuestos. Crea el primero.</p></div>`}
@@ -498,8 +498,8 @@ function capHtml(c, ci) {
     <div class="cap-f">
       <button class="btn" data-act="addPart" data-c="${ci}">Añadir partida</button>
       <button class="btn" data-act="pick" data-c="${ci}">${pickCap === ci ? "Cerrar banco de precios" : "Añadir desde banco de precios"}</button>
-      <button class="btn" data-act="pickPack" data-c="${ci}">${pickPackCap === ci ? "Cerrar packs" : "Añadir pack de faena"}</button>
-      ${c.partidas.length ? `<button class="link" data-act="savePack" data-c="${ci}">Guardar capítulo como pack</button>` : ""}
+      <button class="btn" data-act="pickPack" data-c="${ci}">${pickPackCap === ci ? "Cerrar plantillas" : "Añadir plantilla de trabajo"}</button>
+      ${c.partidas.length ? `<button class="link" data-act="savePack" data-c="${ci}">Guardar capítulo como plantilla</button>` : ""}
     </div>
     ${pickCap === ci ? `<div class="picker">
       <label class="f"><span>Buscar en el banco de precios</span><input id="psearch" type="search" value="${esc(pq)}" placeholder="Código o descripción"></label>
@@ -635,9 +635,9 @@ function vBanco() {
     <section class="panel">
       <p class="hint">Partidas que repites en tus obras. Los precios que vienen de serie son orientativos: cámbialos por los tuyos antes de usarlos.</p>
       <div class="cap-f">
-        <label class="btn" for="bimp-in">Importar precios o packs (CSV)</label>
+        <label class="btn" for="bimp-in">Importar precios o plantillas (CSV)</label>
         <input type="file" id="bimp-in" accept=".csv,text/csv,text/plain" hidden>
-        ${IN_FRAME ? "" : `<button class="btn" data-act="exportBanco">Descargar mi banco (CSV)</button><button class="btn" data-act="exportPacks">Descargar mis packs (CSV)</button>`}
+        ${IN_FRAME ? "" : `<button class="btn" data-act="exportBanco">Descargar mi banco (CSV)</button><button class="btn" data-act="exportPacks">Descargar mis plantillas (CSV)</button>`}
       </div>
       <p class="hint">${S.bancoInfo ? `Último paquete importado: ${esc(S.bancoInfo)}. ` : ""}${S.banco.length} partidas. Al importar, las partidas con el mismo código se actualizan y las nuevas se añaden.</p>
       <label class="f"><span>Buscar</span><input id="bsearch" type="search" value="${esc(bq)}" placeholder="Código o descripción"></label>
@@ -829,9 +829,9 @@ function addPackTo(pk, cap) {
 }
 function packsHtml() {
   return `<section class="panel packs-sec">
-    <div class="ph"><h2>Packs de faenas habituales</h2></div>
-    <p class="hint">Un pack añade de una vez todas las partidas de un trabajo que repites. Los precios salen de tu banco: si lo actualizas, los packs se actualizan. Crea los tuyos con "Guardar capítulo como pack" en el editor.</p>
-    ${S.packs.length ? `<div class="packs">${S.packs.map(packCard).join("")}</div>` : `<p class="hint">No tienes packs todavía.</p>`}
+    <div class="ph"><h2>Plantillas de trabajo</h2></div>
+    <p class="hint">Una plantilla añade de una vez todas las partidas de un trabajo que repites. Los precios salen de tu banco: si lo actualizas, las plantillas se actualizan. Crea las tuyas con "Guardar capítulo como plantilla" en el editor.</p>
+    ${S.packs.length ? `<div class="packs">${S.packs.map(packCard).join("")}</div>` : `<p class="hint">No tienes plantillas todavía.</p>`}
   </section>`;
 }
 function packCard(pk, pi) {
@@ -840,34 +840,34 @@ function packCard(pk, pi) {
     return `<tr><td class="mono">${esc(x.codigo)}</td><td>${esc(x.desc)}</td>
       <td class="r"><input id="pki-${pk.id}-${ii}" data-pki="${pi}.${ii}" class="num-in" inputmode="decimal" value="${esc(it.cant)}" aria-label="Cantidad"></td>
       <td>${esc(x.ud)}</td><td class="r mono" id="pkr-${pk.id}-${ii}">${eur.format(r2(n0(it.cant) * n0(x.precio)))}</td>
-      <td><button class="icon" data-act="delPackItem" data-k="${pi}" data-i="${ii}" aria-label="Quitar del pack">×</button></td></tr>`;
+      <td><button class="icon" data-act="delPackItem" data-k="${pi}" data-i="${ii}" aria-label="Quitar de la plantilla">×</button></td></tr>`;
   }).join("");
   return `<details class="pack" data-pid="${pk.id}" ${openPacks.has(pk.id) ? "open" : ""}>
     <summary><span class="pk-n" id="pkn-${pk.id}">${esc(pk.nombre)}</span><strong class="mono" id="pkt-${pk.id}">${eur.format(packTotal(pk))}</strong><span class="hint">${pk.items.length} partidas${pk.cat ? ` · ${esc(pk.cat)}` : ""}</span></summary>
     <div class="pk-body">
-      <label class="f"><span>Nombre del pack</span><input id="pkname-${pk.id}" data-pk="${pi}.nombre" value="${esc(pk.nombre)}"></label>
-      <div class="tbl-wrap"><table class="med pk-t"><thead><tr><th>Código</th><th>Descripción</th><th class="r">Cantidad</th><th>Ud</th><th class="r">Importe</th><th></th></tr></thead><tbody>${rows || `<tr><td colspan="6" class="hint">Pack vacío</td></tr>`}</tbody></table></div>
+      <label class="f"><span>Nombre de la plantilla</span><input id="pkname-${pk.id}" data-pk="${pi}.nombre" value="${esc(pk.nombre)}"></label>
+      <div class="tbl-wrap"><table class="med pk-t"><thead><tr><th>Código</th><th>Descripción</th><th class="r">Cantidad</th><th>Ud</th><th class="r">Importe</th><th></th></tr></thead><tbody>${rows || `<tr><td colspan="6" class="hint">Plantilla vacía</td></tr>`}</tbody></table></div>
       <div class="cap-f">
         <button class="btn primary" data-act="packToBudget" data-k="${pi}">Añadir al presupuesto abierto</button>
-        <button class="btn danger" data-act="delPack" data-k="${pi}">${pendingDel === "pk:" + pk.id ? "Confirmar: eliminar pack" : "Eliminar pack"}</button>
+        <button class="btn danger" data-act="delPack" data-k="${pi}">${pendingDel === "pk:" + pk.id ? "Confirmar: eliminar plantilla" : "Eliminar plantilla"}</button>
       </div>
     </div></details>`;
 }
 function packPickerHtml(ci) {
-  return `<div class="picker"><span class="hint">Elige un pack: se añaden todas sus partidas a este capítulo.</span>
+  return `<div class="picker"><span class="hint">Elige una plantilla: se añaden todas sus partidas a este capítulo.</span>
     <div class="plist">${S.packs.length ? S.packs.map((pk, pi) => `<button class="pitem" data-act="applyPack" data-k="${pi}" data-c="${ci}">
       <span class="mono">${pk.items.length} part.</span><span class="d">${esc(pk.nombre)}</span><span class="mono">${eur.format(packTotal(pk))}</span></button>`).join("")
-      : `<p class="hint">No hay packs. Créalos en Banco de precios o guarda un capítulo como pack.</p>`}</div></div>`;
+      : `<p class="hint">No hay plantillas. Créalas en Banco de precios o guarda un capítulo como plantilla.</p>`}</div></div>`;
 }
 const normH = (s) => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/"/g, "").trim();
 function isPackCSV(text) {
   const rows = parseCSV(text.split(/\r?\n/)[0] || "");
-  return !!rows[0] && rows[0].map(normH).includes("pack");
+  return !!rows[0] && rows[0].map(normH).some((h) => h === "pack" || h === "plantilla");
 }
 function importPacks(text) {
   const rows = parseCSV(text);
   const h = rows[0].map(normH), ix = (names) => h.findIndex((x) => names.includes(x));
-  const iN = ix(["pack"]), iK = ix(["categoria", "category"]), iC = ix(["codigo", "cod"]), iD = ix(["descripcion", "concepto"]);
+  const iN = ix(["pack", "plantilla"]), iK = ix(["categoria", "category"]), iC = ix(["codigo", "cod"]), iD = ix(["descripcion", "concepto"]);
   const iU = ix(["unidad", "ud"]), iP = ix(["precio", "precio unitario"]), iQ = ix(["cantidad", "cant"]);
   if (iN < 0 || (iD < 0 && iC < 0)) throw new Error("cabecera");
   const map = new Map();
@@ -960,14 +960,14 @@ const ACTS = {
   pickPack(d) { pickPackCap = pickPackCap === +d.c ? null : +d.c; pickCap = null; render(); },
   applyPack(d) {
     const pk = S.packs[+d.k], cap = cur() && cur().caps[+d.c]; if (!pk || !cap) return;
-    addPackTo(pk, cap); pickPackCap = null; save(); render(); toast(`Pack añadido: ${pk.items.length} partidas`);
+    addPackTo(pk, cap); pickPackCap = null; save(); render(); toast(`Plantilla añadida: ${pk.items.length} partidas`);
   },
   savePack(d) {
     const cap = cur().caps[+d.c]; if (!cap.partidas.length) { toast("El capítulo no tiene partidas"); return; }
-    const nombre = cap.nombre.trim() || "Pack sin nombre";
+    const nombre = cap.nombre.trim() || "Plantilla sin nombre";
     const items = cap.partidas.map((p) => ({ codigo: p.codigo, desc: p.desc, ud: p.ud, precio: p.precio, cant: String(r2(cantidad(p))).replace(".", ",") }));
     const ex = S.packs.find((p) => p.nombre === nombre);
-    if (ex) { ex.items = items; toast(`Pack actualizado: ${nombre}`); } else { S.packs.push({ id: uid(), nombre, cat: "", items }); toast(`Pack guardado: ${nombre}`); }
+    if (ex) { ex.items = items; toast(`Plantilla actualizada: ${nombre}`); } else { S.packs.push({ id: uid(), nombre, cat: "", items }); toast(`Plantilla guardada: ${nombre}`); }
     save();
   },
   packToBudget(d) {
@@ -981,14 +981,14 @@ const ACTS = {
   delPack(d) {
     const pk = S.packs[+d.k]; if (!pk) return;
     if (pendingDel !== "pk:" + pk.id) { pendingDel = "pk:" + pk.id; render(); return; }
-    S.packs.splice(+d.k, 1); pendingDel = null; save(); render(); toast("Pack eliminado");
+    S.packs.splice(+d.k, 1); pendingDel = null; save(); render(); toast("Plantilla eliminada");
   },
   delPackItem(d) { const pk = S.packs[+d.k]; if (!pk) return; pk.items.splice(+d.i, 1); save(); render(); },
   exportPacks() {
-    const rows = [["Pack", "Categoría", "Código", "Descripción", "Unidad", "Precio", "Cantidad"]];
+    const rows = [["Plantilla", "Categoría", "Código", "Descripción", "Unidad", "Precio", "Cantidad"]];
     S.packs.forEach((pk) => pk.items.forEach((it) => { const x = packItem(it); rows.push([pk.nombre, pk.cat || "", x.codigo, x.desc, x.ud, x.precio, it.cant]); }));
-    const ok = download(`puntal-packs-${today()}.csv`, toCSV(rows), "text/csv;charset=utf-8");
-    toast(ok ? "Packs descargados" : "No se pudieron descargar los packs");
+    const ok = download(`puntal-plantillas-${today()}.csv`, toCSV(rows), "text/csv;charset=utf-8");
+    toast(ok ? "Plantillas descargadas" : "No se pudieron descargar las plantillas");
   },
   print() { window.print(); },
   copiarLineas() {
@@ -1056,13 +1056,13 @@ document.addEventListener("change", (e) => {
         const txt = String(r.result);
         if (isPackCSV(txt)) {
           const { packs, items } = importPacks(txt); save(); render();
-          toast(`Importados ${packs} packs con ${items} partidas`);
+          toast(`Importadas ${packs} plantillas con ${items} partidas`);
         } else {
           const { add, upd } = importBanco(txt);
           S.bancoInfo = `${file.name} (${fdate(today())})`; save(); render();
           toast(`Paquete importado: ${add} partidas nuevas, ${upd} actualizadas`);
         }
-      } catch (err) { toast("No se pudo leer el CSV. Para precios: columnas Descripción y Precio. Para packs: columnas Pack, Código y Cantidad."); }
+      } catch (err) { toast("No se pudo leer el CSV. Para precios: columnas Descripción y Precio. Para plantillas: columnas Plantilla, Código y Cantidad."); }
       t.value = "";
     };
     r.readAsText(file, "utf-8");

@@ -62,7 +62,7 @@ async function tap(sel){const e=await see(sel);if(!e)return;const r=e.getBoundin
 async function type(sel,txt,ms){const e=await see(sel);if(!e)return;e.focus();e.value='';for(const ch of txt){e.value+=ch;e.dispatchEvent(new Event('input',{bubbles:true}));await wait(ms||90);}e.blur();await wait(250);}
 const END=`<div class="biglogo"><span class="mk">P</span><b>Puntal</b></div><h2>Presupuestos de obra. <em>Gratis.</em></h2>
 <div class="ctab"><strong>Enlace en la bio</strong><span>Se instala en el móvil y funciona sin conexión.</span></div>
-<p>Pide los <b>packs de precios de tu oficio</b>:</p><div class="mail">partida.presupuestos@gmail.com</div>`;
+<p>Pide los <b>precios y plantillas de tu oficio</b>:</p><div class="mail">partida.presupuestos@gmail.com</div>`;
 async function setup(){await new Promise(r=>{const f=fr();if(f.contentDocument&&f.contentDocument.readyState==='complete'&&f.contentWindow.S)r();else f.onload=()=>r();});
  A('try{localStorage.clear()}catch(e){}');A('S=seed();S.packs=defaultPacks();S.empresa.nombre="Instalaciones Ejemplo";S.empresa.nif="";save();render();');}
 window.DONE=false;

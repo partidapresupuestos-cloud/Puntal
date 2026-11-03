@@ -5,7 +5,7 @@ window.T={
 '1':async()=>{await setup();A('go("lista")');await cap('Sales de la obra…');await wait(1600);
  await cap('…y el presupuesto <em>ya está hecho</em>');await wait(1200);
  await tap('[data-act="nuevo"]');await type('#f-cliente-nombre','Cliente de ejemplo',60);
- await cap('Eliges la <em>faena</em>');await tap('[data-act="pickPack"][data-c="0"]');await wait(500);
+ await cap('Eliges el <em>trabajo</em>');await tap('[data-act="pickPack"][data-c="0"]');await wait(500);
  await tap('[data-act="applyPack"][data-k="0"]');await cap('Entran <em>todas las partidas</em>');await see('.part');await wait(1200);
  await see('#f-caps-0-partidas-4-cant');await cap('Ajustas <em>cantidades</em>');await type('#f-caps-0-partidas-4-cant','4',200);await wait(600);
  await cap('El total, <em>al momento</em>');await see('.tot');await wait(1800);
@@ -28,7 +28,7 @@ window.T={
  `<div class="num">03</div><h2>El desmontaje de lo viejo</h2><p>Quitar lo antiguo lleva horas. <b>Va en su partida.</b></p>`,
  `<div class="num">04</div><h2>Material menudo y desplazamientos</h2><p>Cajas, bornas, tacos, viajes… <b>se comen el margen</b>.</p>`,
  `<div class="num">05</div><h2>Las protecciones del cuadro</h2><p>Mira qué pide el REBT y <b>preséntalas aparte</b>.</p>`,
- `<h2>¿Cuál se te ha olvidado <em>a ti</em>?</h2><p>Cuéntalo en comentarios 👇</p><p>En Puntal, los <b>packs completos</b> ya las llevan.</p>`];
+ `<h2>¿Cuál se te ha olvidado <em>a ti</em>?</h2><p>Cuéntalo en comentarios 👇</p><p>En Puntal, las <b>plantillas completas</b> ya las llevan.</p>`];
  for(let i=0;i<C.length;i++){card(C[i]);await wait(i==0?3200:2900);}
  card(END);await wait(4200);},
 '4':async()=>{await setup();A('go("documento")');
@@ -39,7 +39,7 @@ window.T={
  await wait(1200);card(END);await wait(4200);},
 '5':async()=>{await setup();A('importPacks('+JSON.stringify(SPLIT)+');const pk=S.packs[S.packs.length-1];openPacks.add(pk.id);save();go("banco");');
  await cap('¿Cuánto cobras por instalar <em>un split</em>?');await wait(2200);
- await see('details.pack[open]','start');await cap('Así lo presupuesta <em>un pack</em> de Puntal');await wait(800);
+ await see('details.pack[open]','start');await cap('Así lo presupuesta <em>una plantilla</em> de Puntal');await wait(800);
  fr().contentWindow.scrollBy({top:120,behavior:'smooth'});await wait(2600);
  await cap('Precios orientativos: <em>pon los tuyos</em>');await wait(2600);
  await cap('¿Cuánto cobras <em>tú</em>? Comenta 👇');await wait(2800);
