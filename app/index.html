@@ -202,6 +202,14 @@ details.panel > summary::-webkit-details-marker { display: none; }
 .d-pagos td { padding: 6px 0; border-bottom: 1px solid var(--paper-line); }
 .d-pagos td.r { text-align: right; font-family: var(--f-num); font-variant-numeric: tabular-nums; white-space: nowrap; }
 .d-opc { color: var(--paper-muted); font-weight: 400; font-family: var(--f-ui); font-size: 12px; }
+.btn.big { padding: 12px 18px; font-size: 16px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; }
+.btn.rec { background: var(--danger); border-color: var(--danger); color: #fff; }
+.fab { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; display: flex; gap: 10px; justify-content: center; padding: 10px max(16px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); background: rgba(15, 19, 24, .94); box-shadow: 0 -6px 20px rgba(0,0,0,.25); }
+.fab .btn { flex: 1; max-width: 280px; min-height: 54px; font-size: 18px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; gap: 10px; }
+.fab .btn.light { background: #fff; color: #15181C; border-color: #fff; }
+body.has-fab #view { padding-bottom: 96px; }
+body.has-fab .toast { bottom: calc(92px + env(safe-area-inset-bottom, 0px)) !important; z-index: 25; }
+@media print { .fab { display: none !important; } }
 .saved { font-size: 12px; opacity: .6; white-space: nowrap; }
 .saved.err { color: #FF8A80; opacity: 1; font-weight: 600; }
 .tagrow { display: flex; flex-wrap: wrap; gap: 6px; }
@@ -351,6 +359,7 @@ body.obra .ed-side, body.obra .sec-imp { display: none; }
   <div class="bar-in">
     <div class="brand"><b>Puntal</b><span>Presupuestos y mediciones</span><span class="saved" id="saved" aria-live="polite"></span></div>
     <nav aria-label="Secciones">
+      <button type="button" data-view="inicio">Resumen</button>
       <button type="button" data-view="lista">Presupuestos</button>
       <button type="button" data-view="editor">Editar</button>
       <button type="button" data-view="documento">Documento</button>
@@ -479,11 +488,12 @@ function save() {
 }
 let S = load() || seed();
 migrate();
+S.vista = "inicio";
 let pickCap = null, pickPackCap = null, pq = "", bq = "", pendingDel = null, toastT = null;
 const openPacks = new Set();
 let tagF = "", recog = null; const openOpts = new Set();
-const APP_VERSION = "2026.11.03-4";
-const NOVEDADES = ["Enviar el PDF por WhatsApp o correo, y firma del cliente en pantalla", "Agenda de clientes, aviso de presupuestos sin respuesta y mensaje de seguimiento", "Copias automáticas, papelera de 30 días, buscador y etiquetas", "Partidas opcionales, calendario de pagos, descuentos por partida y por capítulo, IVA por partida", "Fotos, croquis y anotaciones, versiones y opciones básica / recomendada / completa", "Documento en catalán, solo resumen, 3 diseños con tu color y descarga en Excel", "Calculadoras de cable, climatización y tubería, dictado por voz y modo obra", "Textos guardados, numeración a tu gusto y calendario de obras"];
+const APP_VERSION = "2026.11.03-5";
+const NOVEDADES = ["Barra fija con Dictar y Croquis en el editor, siempre a mano", "Pantalla de Resumen al abrir la app", "Dictar partidas: di \"tres puntos de luz en el salón y quince metros de tubo\" y se convierten en partidas con su medición", "Botón para cerrar el presupuesto al final del editor", "Enviar el PDF por WhatsApp o correo, y firma del cliente en pantalla", "Agenda de clientes, aviso de presupuestos sin respuesta y mensaje de seguimiento", "Copias automáticas, papelera de 30 días, buscador y etiquetas", "Partidas opcionales, calendario de pagos, descuentos por partida y por capítulo, IVA por partida", "Fotos, croquis y anotaciones, versiones y opciones básica / recomendada / completa", "Documento en catalán, solo resumen, 3 diseños con tu color y descarga en Excel", "Calculadoras de cable, climatización y tubería, dictado por voz y modo obra", "Textos guardados, numeración a tu gusto y calendario de obras"];
 let lq = "", cq = "", segOpen = null, openCli = null, adjPct = "", adjCat = "", bancoPrev = null;
 const cur = () => { const b = S.presupuestos.find((p) => p.id === S.activo); if (b) { if (!Array.isArray(b.pagos)) b.pagos = []; if (!Array.isArray(b.fotos)) b.fotos = []; } return b; };
 const $ = (s) => document.querySelector(s);
@@ -640,10 +650,21 @@ function papeleraHtml() {
     ${S.papelera.map((b, i) => `<div class="ac-row"><span><b class="mono">${esc(b.num)}</b> · ${esc(b.cliente.nombre || "Sin cliente")} · borrado el ${fdate(b.borradoEl)}</span>
       <span class="cap-f"><button class="btn" data-act="restaurar" data-i="${i}">Restaurar</button><button class="btn danger" data-act="purgar" data-i="${i}">${pendingDel === "pu:" + i ? "Confirmar" : "Eliminar del todo"}</button></span></div>`).join("")}</details>`;
 }
+function vInicio() {
+  const rec = S.presupuestos.slice().sort((a, b) => String(b.fecha || "").localeCompare(String(a.fecha || ""))).slice(0, 5);
+  const st = (b) => (ESTADOS.find((e) => e[0] === b.estado) || ESTADOS[0]);
+  return `<div class="page-h"><h1>Resumen</h1><button class="btn primary" data-act="nuevo">Nuevo presupuesto</button></div>
+    <div class="stack">
+      ${novedadesHtml()}${espacioBanner()}${backupBanner()}${revisionHtml()}
+      ${statsHtml() || `<section class="panel"><h2>Empieza aquí</h2><p class="hint">1. Rellena tus datos en Mi empresa. 2. Crea tu primer presupuesto. 3. Añade partidas desde el banco de precios, con una plantilla de trabajo o dictándolas.</p></section>`}
+      ${pendHtml()}${obrasHtml()}
+      ${rec.length ? `<section class="panel"><div class="ph"><h2>Últimos presupuestos</h2><button class="link" data-view="lista">Ver todos</button></div>
+        <div class="plist" style="max-height:none">${rec.map((b) => `<button class="pitem" data-act="abrir" data-id="${b.id}"><span class="mono">${esc(b.num)}</span><span class="d">${esc(b.cliente.nombre || "Sin cliente")} · ${st(b)[1]}</span><span class="mono">${eur.format(totals(b).total)}</span></button>`).join("")}</div></section>` : ""}
+    </div>`;
+}
 function vLista() {
   return `<div class="page-h"><h1>Presupuestos</h1><button class="btn primary" data-act="nuevo">Nuevo presupuesto</button></div>
     <div class="stack">
-      ${novedadesHtml()}${espacioBanner()}${backupBanner()}${revisionHtml()}${statsHtml()}${pendHtml()}${obrasHtml()}
       ${tagRowHtml()}
       ${S.presupuestos.length > 2 ? `<label class="f"><span>Buscar presupuestos</span><input id="lsearch" type="search" value="${esc(lq)}" placeholder="Cliente, obra, número, partida o importe"></label>` : ""}
       <div class="cards" id="cards">${cardsHtml()}</div>
@@ -826,8 +847,10 @@ function capHtml(c, ci) {
     ${pendingDel === "c:" + ci ? `<p class="hint">Este capítulo tiene partidas. Pulsa × otra vez para eliminarlo.</p>` : ""}
     ${c.partidas.map((p, pi) => partHtml(p, ci, pi)).join("") || `<p class="hint">Este capítulo aún no tiene partidas.</p>`}
     <div class="cap-f">
+      <button class="btn primary big" data-act="dictarPartidas" data-c="${ci}">${MIC} Dictar partidas</button>
       <button class="btn" data-act="addPart" data-c="${ci}">Añadir partida</button>
       <button class="btn" data-act="pick" data-c="${ci}">${pickCap === ci ? "Cerrar banco de precios" : "Añadir desde banco de precios"}</button>
+
       <button class="btn" data-act="pickPack" data-c="${ci}">${pickPackCap === ci ? "Cerrar plantillas" : "Añadir plantilla de trabajo"}</button>
       ${c.partidas.length ? `<button class="link" data-act="savePack" data-c="${ci}">Guardar capítulo como plantilla</button>` : ""}
     </div>
@@ -902,7 +925,7 @@ function vEditor() {
         <h2>Fotos y croquis</h2>
         <p class="hint">Fotos de la obra o croquis a mano alzada. Salen al final del documento y se reducen para que ocupen poco.</p>
         ${b.fotos.length ? `<div class="fotos">${b.fotos.map((f, i) => `<div class="foto"><img src="${f.img}" alt="${esc(f.pie || "Foto")}"><input id="f-fotos-${i}-pie" data-b="fotos.${i}.pie" value="${esc(f.pie || "")}" placeholder="Pie de foto" aria-label="Pie de foto"><div class="cap-f"><button class="link" data-act="anotar" data-i="${i}">Anotar</button><button class="link danger" data-act="delFoto" data-i="${i}">${pendingDel === "fo:" + i ? "Confirmar" : "Quitar"}</button></div></div>`).join("")}</div>` : ""}
-        <div class="cap-f"><label class="btn" for="foto-in">Añadir fotos</label><input type="file" id="foto-in" accept="image/*" multiple hidden><button class="btn" data-act="croquis">Dibujar croquis</button>
+        <div class="cap-f"><button class="btn primary big" data-act="croquis">${PEN} Dibujar croquis</button><label class="btn" for="foto-in">Añadir fotos</label><input type="file" id="foto-in" accept="image/*" multiple hidden>
           ${b.fotos.length ? `<label class="chk sm"><input type="checkbox" id="docfotos" ${b.docFotos === false ? "" : "checked"}> Incluir en el documento</label>` : ""}</div>
       </section>
       <section class="panel sec-imp">
@@ -921,6 +944,7 @@ function vEditor() {
         <label class="f"><span>Condiciones y notas</span><textarea id="f-notas" data-b="notas" rows="4">${esc(b.notas)}</textarea></label>
         ${S.textos.length ? `<label class="f"><span>Insertar un texto guardado</span><select id="tx-pick"><option value="">Elige un texto…</option>${S.textos.map((x) => `<option value="${x.id}">${esc(x.nombre || "Sin nombre")}</option>`).join("")}</select></label>` : `<p class="hint">Guarda tus textos habituales en Mi empresa para insertarlos aquí con un toque.</p>`}
       </section>
+      <div class="cap-f"><button class="btn primary" data-view="documento">Ver documento</button><button class="btn" data-act="cerrarPres">Cerrar presupuesto</button></div>
     </div>
     <aside class="ed-side">${totalsHtml()}</aside>
   </div>`;
@@ -1044,7 +1068,8 @@ function vDoc() {
       <textarea id="mat-txt" class="fallback" rows="8" aria-label="Lista de materiales">${esc(materialesTxt(b))}</textarea>
       <div class="cap-f"><button class="btn" data-act="copiarMat">Copiar</button><button class="btn" data-act="waMat">Enviar por WhatsApp</button></div>
     </details>
-    ${modo === "comparativa" ? paperComp(b, grupo, L, e) : paperHtml(b, L, e, modo)}`;
+    ${modo === "comparativa" ? paperComp(b, grupo, L, e) : paperHtml(b, L, e, modo)}
+    <div class="toolbar"><button class="btn" data-view="editor">Volver a editar</button><button class="btn" data-act="cerrarPres">Cerrar presupuesto</button></div>`;
 }
 
 /* ---------- Dibujo: fotos anotadas y croquis ---------- */
@@ -1085,6 +1110,118 @@ function shrink(file, max = 1280, q = 0.7) {
     im.onload = () => { const k = Math.min(1, max / Math.max(im.width, im.height)), c = document.createElement("canvas"); c.width = Math.round(im.width * k); c.height = Math.round(im.height * k); c.getContext("2d").drawImage(im, 0, 0, c.width, c.height); URL.revokeObjectURL(url); res(c.toDataURL("image/jpeg", q)); };
     im.onerror = () => { URL.revokeObjectURL(url); rej(new Error("img")); }; im.src = url;
   });
+}
+
+/* ---------- Dictado a partidas ---------- */
+const MIC = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>`;
+const PEN = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13 7l4 4"/></svg>`;
+const NUMW = { un: 1, uno: 1, una: 1, dos: 2, tres: 3, cuatro: 4, cinco: 5, seis: 6, siete: 7, ocho: 8, nueve: 9, diez: 10, once: 11, doce: 12, trece: 13, catorce: 14, quince: 15, dieciseis: 16, diecisiete: 17, dieciocho: 18, diecinueve: 19, veinte: 20, veintiun: 21, veintiuno: 21, veintidos: 22, veintitres: 23, veinticuatro: 24, veinticinco: 25, veintiseis: 26, veintisiete: 27, veintiocho: 28, veintinueve: 29, treinta: 30, cuarenta: 40, cincuenta: 50, sesenta: 60, setenta: 70, ochenta: 80, noventa: 90, cien: 100, ciento: 100, doscientos: 200, trescientos: 300, cuatrocientos: 400, quinientos: 500 };
+const nrm = (x) => String(x || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+const ROOMS = { salon: "Salón", comedor: "Comedor", cocina: "Cocina", bano: "Baño", aseo: "Aseo", dormitorio: "Dormitorio", habitacion: "Habitación", pasillo: "Pasillo", entrada: "Entrada", recibidor: "Recibidor", terraza: "Terraza", balcon: "Balcón", garaje: "Garaje", trastero: "Trastero", despacho: "Despacho", lavadero: "Lavadero", galeria: "Galería", escalera: "Escalera", jardin: "Jardín", porche: "Porche", fachada: "Fachada", buhardilla: "Buhardilla", sotano: "Sótano", local: "Local", oficina: "Oficina", patio: "Patio" };
+const SYN = { enchufe: "toma corriente schuko", enchufes: "toma corriente schuko", foco: "downlight", focos: "downlight", luces: "punto luz", luz: "punto luz", cable: "linea", cableado: "linea", vater: "inodoro", water: "inodoro", wc: "inodoro", lavamanos: "lavabo", aire: "split climatizacion", acondicionado: "split", conductos: "conducto", automatico: "magnetotermico", automaticos: "magnetotermico", magneto: "magnetotermico", pica: "toma tierra pica", tele: "tv", television: "tv", antena: "tv antena", internet: "datos rj45", red: "datos rj45", cargador: "recarga ve cargador", coche: "recarga ve", placas: "modulo fotovoltaico", paneles: "modulo fotovoltaico", solares: "fotovoltaico", emergencias: "emergencia", calentador: "calentador gas", fuga: "fuga localizacion", atasco: "desatasco", tuberia: "tuberia multicapa", ducha: "ducha plato", conmutador: "conmutado", conmutada: "conmutado", cruzamiento: "cruce" };
+const STOP = new Set(["de", "del", "la", "el", "los", "las", "un", "una", "unos", "unas", "en", "con", "para", "y", "a", "al", "por", "mas", "metro", "metros", "m", "ml", "m2", "cuadrados", "cuadrado", "lineales", "unidades", "unidad", "ud", "uds", "poner", "pon", "instalar", "colocar", "cambiar", "hay", "que", "quiero", "necesito", "nuevo", "nuevos", "nueva", "nuevas", "otro", "otra", "otros", "otras", "tambien", "ademas", "hora", "horas", "h", "kilos", "kg", "medio", "media", "se", "lo", "le", "total"]);
+function wordsToNum(t) {
+  const tk = t.replace(/(\d),(\d)/g, "$1.$2").split(/\s+/), out = [], isN = (w) => w in NUMW, isD = (w) => /^\d+(\.\d+)?$/.test(w || "");
+  for (let i = 0; i < tk.length; i++) {
+    const w = tk[i];
+    if (isN(w) || isD(w)) {
+      let v = isN(w) ? NUMW[w] : parseFloat(w);
+      while (i + 1 < tk.length) {
+        const a = tk[i + 1], b = tk[i + 2];
+        if (a === "y" && isN(b) && v >= 20 && v % 10 === 0 && v < 100 && NUMW[b] < 10) { v += NUMW[b]; i += 2; continue; }
+        if (a === "y" && (b === "medio" || b === "media")) { v += 0.5; i += 2; continue; }
+        if (isN(a) && v >= 100 && v % 100 === 0 && NUMW[a] < 100) { v += NUMW[a]; i++; continue; }
+        if (a === "coma" && (isN(b) || /^\d+$/.test(b || ""))) { v = parseFloat(Math.trunc(v) + "." + (isN(b) ? NUMW[b] : b)); i += 2; continue; }
+        break;
+      }
+      out.push(String(v));
+    } else out.push(w);
+  }
+  return out.join(" ");
+}
+const stem = (w) => w.slice(0, 5);
+let bancoIdx = null;
+function idxBanco() { bancoIdx = S.banco.map((x, i) => ({ x, i, st: new Set(nrm(x.desc + " " + (x.cat || "")).split(/[^a-z0-9]+/).filter(Boolean).map(stem)) })); }
+function parseDictado(text) {
+  idxBanco();
+  const t = wordsToNum(nrm(text).replace(/[;.:]/g, ",").replace(/(\d)\s*(m²|m2)\b/g, "$1 m2").replace(/(\d)(m|ml|h)\b/g, "$1 $2"));
+  const segs = t.split(/,|\s+(?:y|mas|tambien|luego|despues|ademas)\s+(?=\d)/).map((x) => x.trim()).filter(Boolean);
+  return segs.map((seg) => {
+    const m = seg.match(/\d+(?:\.\d+)?/), q = m ? parseFloat(m[0]) : 1;
+    let zona = "", rest = seg;
+    const zm = seg.match(new RegExp(`\\b(${Object.keys(ROOMS).join("|")})(?:\\s+(\\d+|principal|grande|pequeno|de matrimonio))?\\b`));
+    if (zm) { zona = ROOMS[zm[1]] + (zm[2] ? " " + zm[2].replace("pequeno", "pequeño") : ""); rest = seg.replace(zm[0], " "); }
+    const ud = /\b(m2|metros? cuadrados?)\b/.test(seg) ? "m²" : /\b(metros?|m|ml)\b/.test(seg) ? "m" : /\b(horas?|h)\b/.test(seg) ? "h" : /\b(kilos?|kg)\b/.test(seg) ? "kg" : "";
+    const words = rest.replace(/\d+(\.\d+)?/g, " ").split(/[^a-z0-9]+/).filter((w) => w && !STOP.has(w));
+    const qw = new Set(); words.forEach((w) => { if (SYN[w]) SYN[w].split(" ").forEach((y) => qw.add(stem(y))); else if (w.length > 1) qw.add(stem(w)); });
+    (rest.match(/\d+(?:\.\d+)?/g) || []).slice(m && rest.includes(m[0]) ? 1 : 0).forEach((n) => n.split(".").forEach((x) => qw.add(x)));
+    const sc = bancoIdx.map((o) => { let k = 0; qw.forEach((w) => { if (o.st.has(w)) k++; }); if (k && ud && o.x.ud === ud) k += 0.5; return { o, k }; }).filter((r) => r.k >= 1).sort((a, b) => b.k - a.k || a.o.i - b.o.i);
+    const txt = words.join(" ");
+    return { texto: txt ? txt.charAt(0).toUpperCase() + txt.slice(1) : seg, q, zona, ud, id: sc[0] ? sc[0].o.x.id : "__new", alts: sc.slice(0, 6).map((r) => r.o.x.id) };
+  }).filter((r) => r.texto.trim());
+}
+function addDictado(cap, r) {
+  const it = r.id === "__new" ? null : S.banco.find((x) => x.id === r.id), qs = String(r.q).replace(".", ",");
+  let p = it && it.codigo ? cap.partidas.find((x) => x.codigo === it.codigo) : null;
+  const line = () => ({ id: uid(), c: r.zona, n: qs, l: "", a: "", h: "" });
+  if (p) {
+    if (p.lineas.length) p.lineas.push(line());
+    else if (r.zona) { const prev = p.cant; p.lineas = []; if (n0(prev)) p.lineas.push({ id: uid(), c: "", n: prev, l: "", a: "", h: "" }); p.lineas.push(line()); p.cant = ""; }
+    else p.cant = String(r2(n0(p.cant) + r.q)).replace(".", ",");
+    return;
+  }
+  p = newPartida(it || { codigo: "", desc: r.texto, ud: r.ud || "ud", precio: "" });
+  if (r.zona) { p.lineas = [line()]; p.cant = ""; } else p.cant = qs;
+  cap.partidas.push(p);
+}
+function openDictado(ci, auto) {
+  const b0 = cur(); if (!b0) return; if (ci == null || !b0.caps[ci]) ci = b0.caps.length ? b0.caps.length - 1 : -1;
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const m = document.createElement("div"); m.className = "modal"; m.id = "dictm"; let rows = [], rec = null;
+  m.innerHTML = `<div class="box" role="dialog" aria-modal="true" aria-label="Dictar partidas" style="width:min(760px,100%);max-height:92vh;overflow:auto">
+    <h2>Dictar partidas</h2>
+    <p class="hint">Di o escribe lo que hay que hacer, por ejemplo: <i>"tres puntos de luz en el salón, dos enchufes en la cocina y quince metros de tubo en el pasillo"</i>. Puntal lo busca en tu banco de precios y te lo enseña antes de añadirlo.</p>
+    <textarea id="dpt" rows="3" class="fallback" style="min-height:70px;font-family:var(--f-ui);font-size:15px" placeholder="Lo que vas a presupuestar…"></textarea>
+    <label class="f"><span>Añadir al capítulo</span><select id="dcap">${b0.caps.map((c, i) => `<option value="${i}" ${i === ci ? "selected" : ""}>${pad(i + 1)} · ${esc(c.nombre || "Capítulo sin nombre")}</option>`).join("")}<option value="new" ${ci < 0 ? "selected" : ""}>Capítulo nuevo</option></select></label>
+    <div class="cap-f">${SR ? `<button class="btn primary big" id="dmic" type="button">${MIC} Dictar</button>` : ""}<button class="btn" id="dgo" type="button">Interpretar el texto</button></div>
+    <div id="dres" class="stack"></div>
+    <div class="cap-f"><button class="btn" id="dx" type="button">Cancelar</button><button class="btn primary" id="dok" type="button" disabled>Añadir al capítulo</button></div></div>`;
+  document.body.appendChild(m);
+  const ta = m.querySelector("#dpt"), res = m.querySelector("#dres"), ok = m.querySelector("#dok");
+  const opt = (x) => `<option value="${x.id}">${esc((x.codigo ? x.codigo + " · " : "") + x.desc)} (${esc(x.ud)})</option>`;
+  const draw = () => {
+    ok.disabled = !rows.some((r) => r.on);
+    res.innerHTML = rows.length ? rows.map((r, i) => {
+      const alts = r.alts.map((id) => S.banco.find((x) => x.id === id)).filter(Boolean), rest = S.banco.filter((x) => !r.alts.includes(x.id));
+      return `<div class="part" style="border-left-color:${r.id === "__new" ? "var(--muted)" : "var(--ok)"}">
+        <label class="chk sm"><input type="checkbox" data-dr="${i}.on" ${r.on ? "checked" : ""}> <b>${esc(r.texto)}</b></label>
+        <label class="f"><span>Partida</span><select data-dr="${i}.id">${alts.length ? `<optgroup label="Coincidencias">${alts.map(opt).join("")}</optgroup>` : ""}<option value="__new">Partida nueva: ${esc(r.texto)}</option>${rest.length ? `<optgroup label="Resto del banco">${rest.map(opt).join("")}</optgroup>` : ""}</select></label>
+        <div class="fg g4"><label class="f"><span>Cantidad</span><input data-dr="${i}.q" inputmode="decimal" class="num-in" value="${String(r.q).replace(".", ",")}"></label><label class="f"><span>Zona (comentario de la medición)</span><input data-dr="${i}.zona" value="${esc(r.zona)}"></label></div>
+      </div>`;
+    }).join("") : `<p class="hint">No he encontrado nada que añadir. Prueba con frases cortas separadas por comas.</p>`;
+    res.querySelectorAll("select[data-dr]").forEach((sl) => { const i = +sl.dataset.dr.split(".")[0]; sl.value = rows[i].id; });
+  };
+  const go2 = () => { rows = parseDictado(ta.value).map((r) => ({ ...r, on: true })); draw(); };
+  m.querySelector("#dgo").onclick = go2;
+  res.addEventListener("input", (e) => { const d = e.target.dataset.dr; if (!d) return; const [i, k] = d.split("."), r = rows[+i]; if (!r) return;
+    if (k === "on") r.on = e.target.checked; else if (k === "q") r.q = n0(e.target.value); else if (k === "id") { r.id = e.target.value; e.target.closest(".part").style.borderLeftColor = r.id === "__new" ? "var(--muted)" : "var(--ok)"; } else r[k] = e.target.value;
+    ok.disabled = !rows.some((x) => x.on); });
+  res.addEventListener("change", (e) => { const d = e.target.dataset.dr; if (d && d.endsWith(".on")) { rows[+d.split(".")[0]].on = e.target.checked; ok.disabled = !rows.some((x) => x.on); } });
+  if (SR) m.querySelector("#dmic").onclick = (ev) => {
+    const bt = ev.currentTarget; if (rec) { rec.stop(); return; }
+    rec = new SR(); rec.lang = "es-ES"; rec.interimResults = false; rec.continuous = true;
+    rec.onresult = (e2) => { let tx = ""; for (let k = e2.resultIndex; k < e2.results.length; k++) if (e2.results[k].isFinal) tx += e2.results[k][0].transcript + ", "; if (tx) { ta.value = (ta.value ? ta.value.replace(/[\s,]*$/, ", ") : "") + tx.replace(/,\s*$/, ""); go2(); } };
+    rec.onend = () => { rec = null; bt.classList.remove("rec"); bt.innerHTML = MIC + " Dictar"; };
+    rec.onerror = (e2) => toast(e2.error === "not-allowed" ? "Permite el micrófono para dictar" : "No se ha entendido. Prueba otra vez.");
+    try { rec.start(); bt.classList.add("rec"); bt.innerHTML = MIC + " Escuchando… toca para parar"; } catch (x) { rec = null; }
+  };
+  if (SR && auto) setTimeout(() => { const bt = m.querySelector("#dmic"); if (bt) bt.click(); }, 150);
+  m.querySelector("#dx").onclick = () => { if (rec) rec.stop(); m.remove(); };
+  ok.onclick = () => {
+    const b = cur(), cv = m.querySelector("#dcap").value; let cap = b.caps[+cv];
+    if (cv === "new" || !cap) { cap = { id: uid(), nombre: "", partidas: [] }; b.caps.push(cap); }
+    const sel = rows.filter((r) => r.on); sel.forEach((r) => addDictado(cap, r)); if (rec) rec.stop(); m.remove(); save(); render(); toast(`Añadidas ${sel.length} línea${sel.length === 1 ? "" : "s"} al capítulo`); };
+  ta.focus();
 }
 
 /* ---------- Versiones ---------- */
@@ -1257,7 +1394,7 @@ function vEmpresa() {
     </div>`;
 }
 
-const VIEWS = { lista: vLista, editor: vEditor, documento: vDoc, clientes: vClientes, banco: vBanco, calc: vCalc, empresa: vEmpresa };
+const VIEWS = { inicio: vInicio, lista: vLista, editor: vEditor, documento: vDoc, clientes: vClientes, banco: vBanco, calc: vCalc, empresa: vEmpresa };
 
 /* ---------- Render ---------- */
 function outVal(k) {
@@ -1282,12 +1419,16 @@ function updateOutputs() {
   document.querySelectorAll("[data-z]").forEach((el) => { el.hidden = !t[el.dataset.z]; });
 }
 function render() {
-  if (!VIEWS[S.vista]) S.vista = "editor";
+  if (!VIEWS[S.vista]) S.vista = "inicio";
   document.querySelectorAll("nav [data-view]").forEach((b) => {
     if (b.dataset.view === S.vista) b.setAttribute("aria-current", "page"); else b.removeAttribute("aria-current");
   });
   $("#view").innerHTML = VIEWS[S.vista]();
   document.body.classList.toggle("obra", !!S.modoObra && S.vista === "editor");
+  const fabOn = S.vista === "editor" && !!cur(); let fab = document.getElementById("fab");
+  if (fabOn && !fab) { fab = document.createElement("div"); fab.id = "fab"; fab.className = "fab"; fab.innerHTML = `<button class="btn primary" data-act="dictarPartidas">${MIC} Dictar</button><button class="btn light" data-act="croquis">${PEN} Croquis</button>`; document.body.appendChild(fab); }
+  if (!fabOn && fab) fab.remove();
+  document.body.classList.toggle("has-fab", fabOn);
   updateOutputs(); renderBancoList(); renderPickList(); if (S.vista === "calc") renderCalc();
   if (window.SpeechRecognition || window.webkitSpeechRecognition) document.querySelectorAll("#view textarea[data-b]").forEach((ta) => {
     const sp = ta.parentElement && ta.parentElement.querySelector(":scope > span");
@@ -1503,6 +1644,8 @@ const ACTS = {
   },
   setEstado(d) { const b = S.presupuestos.find((p) => p.id === d.id); if (!b) return; b.estado = d.v; if (d.v === "aceptado") b.aceptadoEl = today(); segOpen = null; save(); render(); toast(`${b.num}: ${d.v}`); },
   firmar(d) { openSig(d.w); },
+  cerrarPres() { pickCap = pickPackCap = null; go("lista"); toast("Presupuesto guardado y cerrado"); },
+  dictarPartidas(d) { openDictado(d.c != null ? +d.c : null, true); },
   tagF(d) { tagF = d.v; render(); },
   verOk() { S.verVista = APP_VERSION; save(); render(); },
   revisado() { S.bancoRevisado = today(); save(); render(); },
