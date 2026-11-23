@@ -1,0 +1,87 @@
+{
+ "semana": "2026-48",
+ "carruseles": {
+  "1-dictar-frases": [
+   {
+    "center": false,
+    "html": "<div class=\"eb\">Dictar partidas</div><h1>Frases que Puntal <em>entiende a la primera</em></h1><p>Copia la forma de decirlo y pruébalo en tu próxima visita.</p><div class=\"phone\"><img src=\"img/phone-dictar.png\"></div>"
+   },
+   {
+    "center": true,
+    "html": "<div class=\"eb\">Electricista · Cocina</div><h2>“Seis enchufes, una toma de 25 amperios y <em>cuatro puntos de luz</em> en la cocina”</h2><div class=\"calc\"><div><span>→ 6 ud · Toma de corriente 16 A</span></div><div><span>→ 1 ud · Toma de corriente 25 A</span></div><div><span>→ 4 ud · Punto de luz sencillo</span></div></div>"
+   },
+   {
+    "center": true,
+    "html": "<div class=\"eb\">Frigorista · Salón</div><h2>“Un split de tres coma cinco, cinco metros de línea frigorífica y <em>una bomba de condensados</em>”</h2><div class=\"calc\"><div><span>→ 1 ud · Split 1×1 hasta 3,5 kW</span></div><div><span>→ 5 m · Línea frigorífica 1/4\"-3/8\"</span></div><div><span>→ 1 ud · Bomba de condensados</span></div></div>"
+   },
+   {
+    "center": true,
+    "html": "<div class=\"eb\">Truco</div><h2>La estancia, <em>en cada cosa</em></h2><p>Si dices “en el salón” después de cada partida, queda como <b>línea de medición</b> con su zona. Así el cliente ve qué va en cada sitio.</p><p>Si no, la partida entra igual, sin zona.</p>"
+   },
+   {
+    "center": true,
+    "html": "<div class=\"eb\">Y después</div><h2>Lo que no se dice, <em>se dibuja</em></h2><p>Por dónde va la línea, dónde va la exterior, dónde está el cuadro: eso va al <b>Croquis</b>, en el mismo presupuesto.</p><p>Los dos botones están abajo en el editor: <b>Dictar</b> y <b>Croquis</b>.</p>"
+   },
+   {
+    "center": false,
+    "html": "<div class=\"eb\">Gratis · Sin registros</div><h2>Pruébalo esta semana</h2>\n<div class=\"cta\"><strong>Enlace en la bio</strong><span>Se instala en el móvil y funciona sin conexión.</span></div>\n<p>Para que encuentre todas las partidas de tu oficio, pide los <b>precios y plantillas completos</b>:</p>\n<div class=\"mail\">partida.presupuestos@gmail.com</div>"
+   }
+  ],
+  "2-croquis-split": [
+   {
+    "center": false,
+    "html": "<div class=\"eb\">Croquis · Climatización</div><h1>Antes de dar precio a un aire, <em>dibuja esto</em></h1><p>4 cosas que apuntar en la visita para no volver.</p><div class=\"phone\"><img src=\"img/phone-croquis.png\"></div>"
+   },
+   {
+    "center": true,
+    "html": "<div class=\"big\">01</div><h2>Dónde va la interior</h2><p>Pared, altura y si hay <b>enchufe o línea</b> cerca. Si hay que tirar circuito desde el cuadro, es otra partida.</p>"
+   },
+   {
+    "center": true,
+    "html": "<div class=\"big\">02</div><h2>Dónde va la exterior</h2><p>Fachada, terraza o cubierta. <b>Soporte mural o al suelo</b>, y si se llega sin andamio ni grúa.</p>"
+   },
+   {
+    "center": true,
+    "html": "<div class=\"big\">03</div><h2>El recorrido, <em>en metros</em></h2><p>Por dónde pasa la línea y cuántos metros salen. La instalación básica suele incluir <b>unos pocos metros</b>: lo demás se cobra aparte.</p>"
+   },
+   {
+    "center": true,
+    "html": "<div class=\"big\">04</div><h2>Los condensados</h2><p>¿Cae <b>por gravedad</b> a un desagüe o hace falta <b>bomba</b>? Márcalo con una flecha en el croquis.</p>"
+   },
+   {
+    "center": false,
+    "html": "<div class=\"eb\">Precio de la semana · orientativo</div>\n<table class=\"tbl\"><tr><td class=\"c\">CL-001</td><td>Split 1×1 hasta 3,5 kW, línea hasta 3 m (sin equipo)</td><td class=\"n\">350,00</td></tr>\n<tr><td class=\"c\">CL-004</td><td>Línea frigorífica 1/4\"-3/8\", metro adicional</td><td class=\"n\">35,00/m</td></tr>\n<tr><td class=\"c\">CL-008</td><td>Bomba de evacuación de condensados</td><td class=\"n\">120,00</td></tr></table>\n<h2>El metro de más: <em>¿35 € o cuánto?</em></h2><p>¿Cuánto cobras tú en tu zona? <b>Cuéntalo en comentarios.</b></p>"
+   },
+   {
+    "center": false,
+    "html": "<div class=\"eb\">Gratis · Sin registros</div><h2>Guárdalo para la próxima visita</h2>\n<div class=\"cta\"><strong>Enlace en la bio</strong><span>Croquis con el dedo, medidas y flechas. Sale al final del presupuesto.</span></div>\n<p>¿Eres frigorista? Pide gratis los <b>precios y plantillas de climatización</b>:</p>\n<div class=\"mail\">partida.presupuestos@gmail.com</div>"
+   }
+  ],
+  "3-sin-respuesta": [
+   {
+    "center": false,
+    "html": "<div class=\"eb\">Seguimiento</div><h1>Lo mandaste. <em>No contestan.</em></h1><p>Qué hacer con los presupuestos que se quedan sin respuesta.</p><div class=\"big\">7</div><p>días es buen momento para escribir</p>"
+   },
+   {
+    "center": true,
+    "html": "<div class=\"big\">01</div><h2>Que sea fácil decir que sí</h2><p>PDF claro, con <b>validez</b>, forma de pago y lo que <b>no</b> incluye. Si das opciones, que sean dos o tres, no diez.</p>"
+   },
+   {
+    "center": true,
+    "html": "<div class=\"big\">02</div><h2>A los 7 días, <em>un mensaje corto</em></h2><div class=\"calc\"><div><span class=\"k\">“Hola, soy … Te escribo por el presupuesto P-001. ¿Pudiste verlo? Si quieres ajustar algo, dímelo y lo vemos.”</span></div></div><p>Sin presión y sin bajar el precio antes de que te lo pidan.</p>"
+   },
+   {
+    "center": true,
+    "html": "<div class=\"big\">03</div><h2>Si es que no, <em>pregunta por qué</em></h2><p>¿Precio, plazo o se lo ha hecho otro? Con dos o tres respuestas ya sabes <b>qué ajustar</b> en los siguientes.</p>"
+   },
+   {
+    "center": true,
+    "html": "<div class=\"eb\">En Puntal</div><h2>Te avisa <em>él solo</em></h2><ul><li>En <b>Resumen</b>: pendientes de respuesta a los 7 días.</li><li><b>Mensaje de seguimiento</b> ya escrito.</li><li>Lo copias o lo abres en <b>WhatsApp</b>.</li><li>Lo marcas <b>aceptado o rechazado</b> en un toque.</li></ul>"
+   },
+   {
+    "center": false,
+    "html": "<div class=\"eb\">Gratis · Sin registros</div><h2>Que no se te escape ninguno</h2>\n<div class=\"cta\"><strong>Enlace en la bio</strong><span>Gratis. Se instala en el móvil y en el ordenador.</span></div>\n<p>Pide los <b>precios y plantillas de tu oficio</b>:</p>\n<div class=\"mail\">partida.presupuestos@gmail.com</div>"
+   }
+  ]
+ }
+}
